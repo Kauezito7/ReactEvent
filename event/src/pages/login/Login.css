@@ -1,0 +1,81 @@
+.main_login{
+    display: flex;
+    height: 100vh;
+    background-color: #B51D44;
+}
+
+/* Banner */
+.banner{
+    background-image: url("../..//assets/img/undraw_login_re_4vu2\ 1.png");
+    flex: 1;
+
+    /* Caracteristicas da imagem: */
+    background-size: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Form login da direita: */
+
+.section_login{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.section_login img{
+    width: 265px;
+    margin-bottom: 50px;
+}
+
+.form_login{
+   
+   width: 60%;
+   height: 35%;
+
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   flex-direction: column;
+}
+
+.form_login h1{
+    /* DEIXAR LETRA MAISCULA */
+    text-transform: uppercase;
+}
+
+.campo_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.campo_input input {
+    border: 0;
+    border-bottom: 2px solid rgb(200, 200, 200);
+    width: 280px;
+    height: 30px;
+}
+
+a {
+    color: rgb(200, 200, 200);
+    height: 20px;
+    margin-top: 70px;
+}
+
+.campos_login{
+    height: 20px;
+}
+
+/* RESPONSIVIDADE */
+/* ME DE CARACTERISTAS A PARTIR DE UMA TELA */
+@media screen and (max-width: 768px){
+    /* opx -> 768px */
+    .banner{
+        /* desaparece o banner */
+        display: none;
+    }
+}
