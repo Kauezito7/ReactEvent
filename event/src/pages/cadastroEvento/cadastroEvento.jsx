@@ -43,7 +43,7 @@ const CadastroEvento = () => {
         // console.log(descricao);
         // console.log(tipoEvento);
         // console.log(instituicoes);
-    
+
 
         evt.preventDefault();
 
@@ -87,7 +87,7 @@ const CadastroEvento = () => {
         }
     }
 
-       async function listarEvento() {
+    async function listarEvento() {
         try {
             const resposta = await api.get("Eventos");
 
@@ -97,10 +97,112 @@ const CadastroEvento = () => {
         }
     }
 
+    async function deletarEvento(id) {
+        Swal.fire({
+            title: 'Tem Certeza?',
+            text: "Essa ação não poderá ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#B51D44',
+            cancelButtonColor: '#000000',
+            confirmButtonText: 'Sim, apagar!',
+            cancelButtonText: 'Cancelar',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await api.delete(`eventos/${id.idEvento}`);
+                alertar("success", "Evento Excluido!");
+            }
+        }).catch(error => {
+            console.log(error);
+            alertar("error", "Erro ao Excluir!");
+        })
+    }
+
+
+    async function editarEvento(evento) {
+        try {
+            const tiposOptions = listaTipoEvento
+                .map(tipo => `<option value="${tipo.idTipoEvento}" ${tipo.idTipoEvento === evento.idTipoEvento ? 'selected' : ''}>${tipo.tituloTipoEvento}</option>`)
+                .join('');
+
+            const { value } = await Swal.fire({
+                title: "Editar Tipo de Evento",
+                html: `
+        <input id="campo1" class="swal2-input" placeholder="Título" value="${evento.nomeEvento || ''}">
+        <input id="campo2" class="swal2-input" type="date" value="${evento.dataEvento?.substring(0, 10) || ''}">
+        <select id="campo3" class="swal2-select">${tiposOptions}</select>
+        <input id="campo4" class="swal2-input" placeholder="Categoria" value="${evento.descricao || ''}">
+      `,
+                showCancelButton: true,
+                confirmButtonText: "Salvar",
+                cancelButtonText: "Cancelar",
+                focusConfirm: false,
+                preConfirm: () => {
+                    const campo1 = document.getElementById("campo1").value;
+                    const campo2 = document.getElementById("campo2").value;
+                    const campo3 = document.getElementById("campo3").value;
+                    const campo4 = document.getElementById("campo4").value;
+
+                    if (!campo1 || !campo2 || !campo3 || !campo4) {
+                        Swal.showValidationMessage("Preencha todos os campos.");
+                        return false;
+                    }
+
+                    return { campo1, campo2, campo3, campo4 };
+                }
+            });
+
+            if (!value) {
+                console.log("Edição cancelada pelo usuário.");
+                return;
+            }
+
+            console.log("Dados para atualizar:", value);
+
+            await api.put(`eventos/${evento.idEvento}`, {
+                nomeEvento: value.campo1,
+                dataEvento: value.campo2,
+                idTipoEvento: value.campo3,
+                descricao: value.campo4,
+            });
+
+            console.log("Evento atualizado com sucesso!");
+            Swal.fire("Atualizado!", "Dados salvos com sucesso.", "success");
+            listarEvento();
+
+        } catch (error) {
+            console.log("Erro ao atualizar evento:", error);
+            Swal.fire("Erro!", "Não foi possível atualizar.", "error");
+        }
+    }
+
+    async function descricaoEvento() {
+        Swal.fire({
+            title: "<strong>HTML <u>example</u></strong>",
+            icon: "info",
+            html: `
+            You can use <b>bold text</b>,
+            <a href="#" autofocus>links</a>,
+            and other HTML tags
+            `,
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: `
+             <i class="fa fa-thumbs-up"></i> Great!
+             `,
+            confirmButtonAriaLabel: "Thumbs up, great!",
+            cancelButtonText: `
+            <i class="fa fa-thumbs-down"></i>
+             `,
+            cancelButtonAriaLabel: "Thumbs down"
+        });
+    }
+
     useEffect(() => {
         listarTipoEvento();
         listarEvento();
-    }, [])
+    }, [listaEvento])
 
     return (
         <>
@@ -110,7 +212,7 @@ const CadastroEvento = () => {
                     namePlace="Nome"
                     namePlace2="Data do evento"
                     namePlace3="Descricao"
-                    
+
                     valorInput={evento}
                     setValorInput={setEvento}
 
@@ -125,13 +227,13 @@ const CadastroEvento = () => {
                     valorTpEvento={tipoEvento}
                     setValorTpEvento={setTipoEvento}
 
-                     valorInstituicao={instituicoes}
+                    valorInstituicao={instituicoes}
                     setValorInstituicao={setInstituicoes}
-                    
+
                     lista={listaTipoEvento}
 
                     // onChange={(e) => setEvento(e.target.value)}
-                    
+
                     // valorTpEvento={}
                     // valorTipoEvento={listaTipoEvento}
                     // setValorTipoEvento={setListaTipoEvento}
@@ -140,11 +242,25 @@ const CadastroEvento = () => {
 
                 />
 
-                <Lista titulo="Lista de eventos"
+                <Lista titulo="Eventos"
                     tipos="Nome Evento"
+
                     tipos2="Tipo Evento"
+                    lista={listaEvento}
+
                     nome="Nome"
                     nome2="Tipo evento"
+                    titulocoluna1="Nome do Evento"
+                    titulocoluna2="Data"
+                    titulocoluna3="Evento"
+                    titulocoluna4="Editar"
+                    titulocoluna5="Excluir"
+                    titulocoluna6="Descricao"
+
+
+                    funcExcluir={deletarEvento}
+                    funcEditar={editarEvento}
+                    funcDescricao={descricaoEvento}
 
 
 
