@@ -159,6 +159,7 @@ const CadastroTipoEvento = () => {
                     lista={listaTipoEvento}
                     chaveNome="tituloTipoEvento"
                     chaveId="idTipoEvento"
+                    nomePlace="Titulo"
                     visibilidade="table-cell"
                     funcEditar={atualizarTipoEvento}
                     funcExcluir={excluirTipoEvento}

@@ -166,7 +166,7 @@ const CadastroTipoUsuario = () => {
             <Cadastro
                 imagem={Banner}
                 tituloCadastro="Cadastro Tipo de Usuário"
-                nomePlace="Título"
+                namePlace="Titulo"
                 visibilidade="none"
                 valorInput={tipoUsuario}
                 setValorInput={setTipoUsuario}
@@ -180,13 +180,13 @@ const CadastroTipoUsuario = () => {
                 titulo="Lista De Tipo Usuário"
                 lista={listaTipoUsuario}
                 tipos="Tipo Usuario"
-                nomePlace="Titulo"
+                namePlace="Titulo"
                 visibilidade="table-cell"
                 chaveId="idTipoUsuario"
                 chaveNome="tituloTipoUsuario"
                 funcEditar={atualizarTipoUsuario}
                 funcExcluir={excluirTipoUsuario}
-                titulocoluna1="Tipo"
+                titulocoluna2="Tipo"
 
                 titulocoluna3="Editar"
                 titulocoluna4="Excluir"

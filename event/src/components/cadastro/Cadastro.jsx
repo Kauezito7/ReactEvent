@@ -33,25 +33,29 @@ const Cadastro = (props) => {
                                 type="date"
                                 name="nome"
                                 placeholder={props.namePlace2}
-                                value={props.valorInput2}
-                                onChange={(e) => props.setValorInput(e.target.value)}
+                                value={props.valorData}
+                                onChange={(e) => props.setValorData(e.target.value)}
+                                
                             />
 
-                            <label htmlFor="tipoEvento"></label>
-                            <select name="tipoEvento" id="" 
-                            style={{ display: props.visibilidade }}
-                            value={props.valorSelect}
-                            onChange={(e) => props.setValorSelect(e.target.value)}>
+                            {/* <label htmlFor="tipoEvento"></label> */}
+                            <select name="tipoEvento" id=""
+                                style={{ display: props.visibilidade }}
+                                value={props.valorTpEvento}
+                                onChange={(e) => props.setValorTpEvento(e.target.value)}>
                                 <option value="" disabled selected>Tipo Evento</option>
-                                {props.lista && props.lista.length > 0 && props.lista.map((itemEvento) =>
-                                <option value={itemEvento.idTipoEvento}>{itemEvento.tituloTipoEvento}</option>
+                                {props.lista &&
+                                    props.lista.length > 0 &&
+                                    props.lista.map((itemEvento) =>
+                                        <option value={itemEvento.idTipoEvento}>{itemEvento.tituloTipoEvento}</option>
                                 )}
+
                             </select>
 
                             <select name={props.select2} id="" style={{ display: props.visibilidade }}>
                                 <option value="" disabled selected>Instituicao</option>
                                 <option value="1D4F3D51-743B-41C0-B148-538DAA48BE32"> SENAI  </option>
-                                
+
                             </select>
 
                             {/* <input
@@ -63,7 +67,10 @@ const Cadastro = (props) => {
                                 onChange={(e) => props.setValorInput(e.target.value)}
                             /> */}
 
-                            <textarea name="" id="" style={{ display: props.visibilidade }}></textarea>
+                            <textarea name="" id="" style={{ display: props.visibilidade }}
+                                value={props.valorInputDescricao}
+                                onChange={(e) => props.setValorInputDescricao(e.target.value)}>
+                            </textarea>
 
                         </div>
 

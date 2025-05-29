@@ -45,6 +45,13 @@ const Lista = (props) => {
                                         onClick={() => props.funcExcluir(item[props.chaveId])}
                                     />
                                 </td>
+
+                                {/* <td data-cell="Descrição" className="botao_edicao" style={{ display: props.visibilidade2 }}>
+                                    <img src={Descricao}
+                                        alt="Exclamação"
+                                        onClick={() => props.funcDescricao(item)}
+                                    />
+                                </td> */}
                             </tr>
                         ))
                     ) : (
