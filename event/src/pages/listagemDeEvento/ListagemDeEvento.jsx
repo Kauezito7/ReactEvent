@@ -2,31 +2,43 @@ import "./ListagemDeEventos.css"
 import Footer from "../../components/footer/Footer";
 import Comentario from "../../assets/img/Comentario.png"
 import Header from "../../components/header/Header";
-import Ligado from "../../assets/img/Ligado.png"
-import Desligado from "../../assets/img/Desligado.png"
+// import Ligado from "../../assets/img/Ligado.png"
+// import Desligado from "../../assets/img/Desligado.png"
 import { useEffect, useState } from "react";
 import Toggle from "../../components/toggle/toggle";
 import api from "../../Services/services"
 import { format } from "date-fns";
-import Modal  from "../../components/modal/Modal";
+import descricao2 from "../../assets/img/descricao2.png"
+import Modal from "../../components/modal/Modal";
 
 
 
 const ListagemEventos = () => {
-    const [toggled, setToggled] = useState(false);
+    // const [toggled, setToggled] = useState(false);
 
-    const [listaEvento, setListaEvento]= useState ([]);
-    async function listarEventos(){
+    const [listaEvento, setListaEvento] = useState([]);
+    const [tipoModal, setTipoModal] = useState(""); // "descricaoEvento" ou "comentario"
+    const [dadosmModal, setDadosModal] = useState ({}); // descricaoEvento, idEvento, etc
+
+
+    async function listarEventos() {
         try {
-            const eventoListado = await api.get ("eventos")
+            const eventoListado = await api.get("eventos")
             setListaEvento(eventoListado.data)
         } catch (error) {
-            console.log(error);          
+            console.log(error);
         }
     }
     useEffect(() => {
         listarEventos();
-    },[])
+    }, [])
+
+    function abrirModal(tipo, dados) {
+        //tipo de modal
+        //dados 
+        setTipoModal(tipo)
+        setDadosModal(dados)
+    }
     return (
         <>
             <Header nomeusu="Aluno" />
@@ -41,37 +53,41 @@ const ListagemEventos = () => {
                         <option value=""> op 3</option>
                     </select>
                     <table>
-                    <thead>
-                        <tr className="table_evento">
-                            <th>Titulo</th>
-                            <th>Data Evento</th>
-                            <th>Tipo Evento</th>
-                            <th>Comentarios</th>
-                            <th>Participar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        <thead>
+                            <tr className="table_evento">
+                                <th>Titulo</th>
+                                <th>Data Evento</th>
+                                <th>Tipo Evento</th>
+                                <th>Descrição</th>
+                                <th>Comentarios</th>
+                                <th>Participar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    {listaEvento.length > 0 ? (
-                    listaEvento.map((item) => (
-                        <tr className="campo_evento">
-                            <td data-cell="Nome" >{item.nomeEvento}</td>
-                            <td>{format(item.dataEvento, "dd/MM/yy")}</td>
-                            <td data-cell="Evento">{item.tiposEvento.tituloTipoEvento}</td>
-                            <td data-cell="Editar"><img src={Comentario} alt="Imagem de comentar" /></td>
-                            <td data-cell="Botao"><Toggle/></td>                       
-                        </tr>
-                        )) 
-                    ): (
-                        <p>nenhum evento encontrado</p>
-                    )}   
-                    </tbody>                   
-                </table>
+                            {listaEvento.length > 0 ? (
+                                listaEvento.map((item) => (
+                                    <tr className="campo_evento">
+                                        <td data-cell="Nome" >{item.nomeEvento}</td>
+                                        <td>{format(item.dataEvento, "dd/MM/yy")}</td>
+                                        <td data-cell="Evento">{item.tiposEvento.tituloTipoEvento}</td>
+                                        <td className="descricao"><img src={descricao2} alt="" /></td>
+                                        <td data-cell="Editar"><img src={Comentario} alt="Imagem de comentar" /></td>
+                                        <td data-cell="Botao"><Toggle /></td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <p>nenhum evento encontrado</p>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             </section>
-            <Footer />
 
-            <Modal/>
+            {/* <Footer /> */}
+
+            <Modal
+                titulo={tipoModel == "descricaoEvento" ? "Descricao do evento" : "Comentario"} />
         </>
     )
 }

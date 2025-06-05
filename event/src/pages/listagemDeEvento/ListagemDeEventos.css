@@ -80,6 +80,7 @@
 }
 .campo_evento td {
     padding: 30px 5px 30px;
+    width: 500px;
     border-bottom: #201849 1px solid;
     
 }
