@@ -1,6 +1,6 @@
 import imgDeletar from "../../assets/img/imgDeletar.png"
 import api from "../../Services/services"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Modal.css"
 
 
@@ -8,17 +8,29 @@ const Modal = (props) => {
 
   const [comentarios, setComentarios] = useState([]);
 
-  async function listarComentarios (){
+  async function listarComentarios() {
     try {
-        const resposta = await api.get(`ComentariosEventos/ListarSomenteExibe?id=${props.idEvento}`)
+      const resposta = await api.get(`ComentariosEventos/ListarSomenteExibe?id=${props.idEvento}`)
 
-        setComentarios(resposta.data);
+      setComentarios(resposta.data);
 
     } catch (error) {
       console.log(error);
-      
+
     }
   }
+
+  useEffect(() => {
+    listarComentarios();
+  }, [])
+
+    async function cadastrarComentarios() {
+
+    }
+
+    function deletarComentario() {
+      
+    }
 
   return (
     <>
@@ -30,7 +42,7 @@ const Modal = (props) => {
             <p>{props.descricao}</p>
           ) : (
             <>
-              {comentarios.map((item) => {
+              {comentarios.map((item) => 
                 <div key={item.idComentarioEvento}>
                   <strong>{item.usuario.nomeUsuario}
                   </strong>
@@ -38,7 +50,7 @@ const Modal = (props) => {
                   <p>{item.descricao}</p>
                   <hr />
                 </div>
-              })}
+              )}
               <div>
                 <input type="text"
                   placeholder="Escreva seu comentario..." />

@@ -18,13 +18,27 @@ const ListagemEventos = () => {
 
     const [listaEvento, setListaEvento] = useState([]);
     const [tipoModal, setTipoModal] = useState(""); // "descricaoEvento" ou "comentario"
-    const [dadosmModal, setDadosModal] = useState ({}); // descricaoEvento, idEvento, etc
+    const [dadosModal, setDadosModal] = useState({}); // descricaoEvento, idEvento, etc.
+    const [modalAberto, setModalAberto] = useState(false);
+
+    const [usuarioId, setUsuarioId] = useState ("5DFBD257-AA7E-4067-8B7B-CDEE2A6C406C")
 
 
     async function listarEventos() {
         try {
-            const eventoListado = await api.get("eventos")
-            setListaEvento(eventoListado.data)
+            const resposta = await api.get("eventos")
+            const todosOsEventos = resposta.data;
+
+            const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
+            const minhasPresencas = respostaPresenca.data;
+
+            const eventosComPresencas = todosOsEventos.map(() => {
+
+            })
+
+            setListaEvento(eventosComPresencas)
+
+            
         } catch (error) {
             console.log(error);
         }
@@ -38,6 +52,13 @@ const ListagemEventos = () => {
         //dados 
         setTipoModal(tipo)
         setDadosModal(dados)
+        setModalAberto(true)
+    }
+
+    function fecharModal() {
+        setModalAberto(false)
+        setDadosModal({})
+        setTipoModal("")
     }
     return (
         <>
@@ -71,8 +92,12 @@ const ListagemEventos = () => {
                                         <td data-cell="Nome" >{item.nomeEvento}</td>
                                         <td>{format(item.dataEvento, "dd/MM/yy")}</td>
                                         <td data-cell="Evento">{item.tiposEvento.tituloTipoEvento}</td>
-                                        <td className="descricao"><img src={descricao2} alt="" /></td>
-                                        <td data-cell="Editar"><img src={Comentario} alt="Imagem de comentar" /></td>
+                                        <td>
+                                            <img src={descricao2} alt="icon" onClick={() => abrirModal("descricaoEvento", { descricao: item.descricao })} />
+                                        </td>
+                                        <td>
+                                            <img src={Comentario} alt="icon" onClick={() => abrirModal("comentarios", { idEvento: item.idEvento })} />
+                                        </td>
                                         <td data-cell="Botao"><Toggle /></td>
                                     </tr>
                                 ))
@@ -82,12 +107,21 @@ const ListagemEventos = () => {
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </section >
 
             {/* <Footer /> */}
 
-            <Modal
-                titulo={tipoModel == "descricaoEvento" ? "Descricao do evento" : "Comentario"} />
+            {modalAberto && (
+                < Modal
+                    titulo={tipoModal == "descricaoEvento" ? "Descricao do evento" : "Comentario"}
+                    tipoModel={tipoModal}
+
+                    idEvento={dadosModal.idEvento}
+                    descricao={dadosModal.descricao}
+
+                    fecharModal={fecharModal}
+                />
+            )}
         </>
     )
 }
