@@ -7,6 +7,8 @@ import "./Modal.css"
 const Modal = (props) => {
 
   const [comentarios, setComentarios] = useState([]);
+  const [usuarioId, setUsuarioId] = useState("5DFBD257-AA7E-4067-8B7B-CDEE2A6C406C")
+  const [novoComentario, setNovoComentario] = useState ("")
 
   async function listarComentarios() {
     try {
@@ -24,12 +26,22 @@ const Modal = (props) => {
     listarComentarios();
   }, [])
 
-    async function cadastrarComentarios() {
-
+    async function cadastrarComentarios(comentario) {
+      try {
+        await api.post("ComentariosEventos", {idUsuario: usuarioId, idEvento: props.idEvento, Descricao: comentario})
+      } catch (error) {
+        console.log(error);
+        
+      }
     }
 
-    function deletarComentario() {
-      
+    async function deletarComentario() {
+      try {
+        await api.delete(`ComentariosEventos/${idComentario}`);
+      } catch (error) {
+        console.log(error);
+        
+      }
     }
 
   return (
@@ -46,15 +58,17 @@ const Modal = (props) => {
                 <div key={item.idComentarioEvento}>
                   <strong>{item.usuario.nomeUsuario}
                   </strong>
-                  <img src={imgDeletar} alt="excluir" />
+                  <img src={imgDeletar} alt="Deletar" onClick={() => deletarComentario(item.idComentarioEvento)}/>
                   <p>{item.descricao}</p>
                   <hr />
                 </div>
               )}
               <div>
                 <input type="text"
-                  placeholder="Escreva seu comentario..." />
-                <button>
+                  placeholder="Escreva seu comentario..." 
+                  value={novoComentario}
+                  onChange={(e) => setNovoComentario(e.target.value)}/>
+                <button onClick={() => cadastrarComentarios (novoComentario)}>
                   Cadastrar
                 </button>
               </div>
