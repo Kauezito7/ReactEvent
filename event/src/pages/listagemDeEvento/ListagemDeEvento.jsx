@@ -58,7 +58,7 @@ const ListagemEventos = () => {
     }
     useEffect(() => {
         listarEventos();
-    }, [])
+    }, [listaEvento])
 
 
 
@@ -77,9 +77,6 @@ const ListagemEventos = () => {
     }
 
     async function manipularPresenca(idEvento, presenca, idPresenca) {
-        console.log("aaaaaa");
-        console.log(idPresenca);
-        
         try {
             if (presenca && idPresenca != "") {
                 //atualizacao: situacao para FALSE 
@@ -91,10 +88,8 @@ const ListagemEventos = () => {
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success')
             }else{
                 //cadastrar uma nova presenca
-                // console.log(usuarioId);
-                console.log("aaaaaaaaaaaaaaa");
+                // console.log(usuarioId)         
                 const resp = await api.post("PresencasEventos", {situacao: true, idUsuario: usuarioId, idEvento: idEvento });
-                console.log(resp);
                 Swal.fire('Confirmado!', 'Sua presenca foi confrimada.', 'success');
             }
         } catch (error) {
