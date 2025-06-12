@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { userDecodeToken } from "../../auth/Auth";
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"
 
 const Login = () => {
 
@@ -14,6 +15,8 @@ const Login = () => {
     const [senha, setSenha] = useState("")
     
     const navigate = useNavigate();
+
+    const {setUsuario} = useAuth()
 
      function alertar(icone, mensagem) {
             const Toast = Swal.mixin({
@@ -50,9 +53,11 @@ const Login = () => {
                 if(token){
                     //token sera decodificado:
                     const tokenDecodificado = userDecodeToken(token);
-                    
+
                     // Armazenando:
-                    secureLocalStorage.setItem("nomem", JSON.stringify(tokenDecodificado));
+                    secureLocalStorage.setItem("nome", JSON.stringify(tokenDecodificado));
+
+                    setUsuario(tokenDecodificado);
 
                     if(tokenDecodificado.tipoUsuario === "aluno"){
                         //redirecionar a tela de aluno (branca)

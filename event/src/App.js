@@ -6,13 +6,14 @@ import CadastroEvento from "./pages/cadastroEvento/cadastroEvento.jsx";
 import CadastroTipoEvento from "./pages/cadastroTipoEvento/cadastroTipoEvento.jsx";
 import CadastroTipoUsuario from "./pages/cadastroTipoUsuario/cadastroTipoUsuario.jsx";
 import Rotas from './Routes/routes.js';
+import { AuthProvider } from './contexts/AuthContext.js';
 
 
 function App() {
   return (
-    <>
+    <AuthProvider>
     <Rotas/>
-    </>
+    </AuthProvider>
   );
 }
 

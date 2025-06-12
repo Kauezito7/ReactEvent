@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import descricao2 from "../../assets/img/descricao2.png"
 import Modal from "../../components/modal/Modal";
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 
@@ -26,7 +27,9 @@ const ListagemEventos = () => {
     const [filtroData, setFiltroData] = useState(["todos"])
   
 
-    const [usuarioId, setUsuarioId] = useState("5DFBD257-AA7E-4067-8B7B-CDEE2A6C406C")
+    // const [usuarioId, setUsuarioId] = useState("5DFBD257-AA7E-4067-8B7B-CDEE2A6C406C")
+
+    const {usuario} = useAuth();
     
 
 
@@ -35,7 +38,7 @@ const ListagemEventos = () => {
             const resposta = await api.get("eventos")
             const todosOsEventos = resposta.data;
 
-            const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
+            const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuario.idUsuario)
             const minhasPresencas = respostaPresenca.data;
 
             const eventosComPresencas = todosOsEventos.map((atualEvento) => {
@@ -89,7 +92,7 @@ const ListagemEventos = () => {
             }else{
                 //cadastrar uma nova presenca
                 // console.log(usuarioId)         
-                const resp = await api.post("PresencasEventos", {situacao: true, idUsuario: usuarioId, idEvento: idEvento });
+                const resp = await api.post("PresencasEventos", {situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
                 Swal.fire('Confirmado!', 'Sua presenca foi confrimada.', 'success');
             }
         } catch (error) {
