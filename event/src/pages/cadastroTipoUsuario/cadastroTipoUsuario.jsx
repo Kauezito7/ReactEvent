@@ -179,7 +179,7 @@ const CadastroTipoUsuario = () => {
             <Lista
                 titulo="Lista De Tipo Usuário"
                 lista={listaTipoUsuario}
-                tipos="Tipo Usuario"
+                tipoLista="Tipo Usuario"
                 namePlace="Titulo"
                 visibilidade="table-cell"
                 chaveId="idTipoUsuario"
@@ -187,6 +187,8 @@ const CadastroTipoUsuario = () => {
                 funcEditar={atualizarTipoUsuario}
                 funcExcluir={excluirTipoUsuario}
                 titulocoluna2="Tipo"
+                visibilidadeD="none"
+                visibilidade2="none"
 
                 titulocoluna3="Editar"
                 titulocoluna4="Excluir"

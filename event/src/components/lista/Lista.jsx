@@ -29,9 +29,9 @@ const Lista = (props) => {
                                 {/* Mostra o nome do item */}
                                 <td data-cell="Nome" style={{ display: props.tipoEvento }}>{props.tipoLista == "TiposEventos" ? item.tituloTipoEvento : item.tituloTipoUsuario ? item.nomeEvento : item.nomeEvento}</td>
 
-                                <td data-cell="Tipo Evento" style={{ display: props.visibilidade }}>{new Date(item.dataEvento).toLocaleDateString('pt-BR')}</td>
+                                <td data-cell="Data Evento" style={{ display: props.visibilidadeD }}>{new Date(item.dataEvento).toLocaleDateString('pt-BR')}</td>
 
-                                <td data-cell="Data Evento" style={{ display: props.visibilidade }}>{item.tiposEvento?.tituloTipoEvento}</td>
+                                <td data-cell="Tipo Evento" style={{ display: props.visibilidade }}>{item.tiposEvento?.tituloTipoEvento}</td>
 
                                 {/* Ícone para editar, chama a função passada por props */}
                                 <td>

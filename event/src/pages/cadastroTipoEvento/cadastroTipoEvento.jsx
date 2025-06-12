@@ -159,16 +159,19 @@ const CadastroTipoEvento = () => {
                 <Lista
                    titulo="Lista tipo de Eventos"
                     lista={listaTipoEvento}
+                    tipoLista="TiposEventos"
                     chaveNome="tituloTipoEvento"
                     chaveId="idTipoEvento"
                     nomePlace="Titulo"
-                    visibilidade="table-cell"
+                    visibilidadeD="none"
+                    visibilidade2="none"
                     funcEditar={atualizarTipoEvento}
                     funcExcluir={excluirTipoEvento}
                     titulocoluna1= "Titulo"
                     
                     titulocoluna3= "Editar"
                     titulocoluna4= "Excluir"
+                    
                 />
 
             </main>

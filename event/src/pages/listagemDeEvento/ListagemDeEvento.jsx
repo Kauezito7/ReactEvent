@@ -82,17 +82,21 @@ const ListagemEventos = () => {
     async function manipularPresenca(idEvento, presenca, idPresenca) {
         try {
             if (presenca && idPresenca != "") {
+                console.log("Aqui 1");
+                
                 //atualizacao: situacao para FALSE 
                 await api.put(`PresencasEventos/${idPresenca}`, {situacao: false});
                 Swal.fire ('Removido!', 'Sua presenca foi removida.', 'success')
-            }else if(idPresenca != ""){
+            }else if(idPresenca != null){
+                console.log("Aqui 2");
                 //atualizacao: situacao para TRUE
                 await api.put(`PresencasEventos/${idPresenca}`, {situacao: true});
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success')
             }else{
+                console.log("Aqui 3");
                 //cadastrar uma nova presenca
                 // console.log(usuarioId)         
-                const resp = await api.post("PresencasEventos", {situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
+                await api.post("PresencasEventos", {situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
                 Swal.fire('Confirmado!', 'Sua presenca foi confrimada.', 'success');
             }
         } catch (error) {
