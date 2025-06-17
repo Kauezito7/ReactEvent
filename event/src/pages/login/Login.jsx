@@ -11,10 +11,10 @@ import { useAuth } from "../../contexts/AuthContext"
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
-    
-    const navigate = useNavigate();
 
     const {setUsuario} = useAuth()
 
@@ -48,23 +48,29 @@ const Login = () => {
             try {
                 const resposta = await api.post("Login", usuario);
 
+                
                 const token = resposta.data.token;
                 
                 if(token){
                     //token sera decodificado:
                     const tokenDecodificado = userDecodeToken(token);
-
-                    // Armazenando:
-                    secureLocalStorage.setItem("nome", JSON.stringify(tokenDecodificado));
-
+                    
                     setUsuario(tokenDecodificado);
+                    // Armazenando:
+                    secureLocalStorage.setItem("tokenLogin", JSON.stringify(tokenDecodificado));
+                    
+                    console.log(tokenDecodificado.tipoUsuario)
 
-                    if(tokenDecodificado.tipoUsuario === "aluno"){
+                    if(tokenDecodificado.tipoUsuario === "Comum"){
+
+                        console.log("caiuuu aqui");
+                        
                         //redirecionar a tela de aluno (branca)
                         navigate("/ListaEvento")
                     }else{
-                        //ele vai me encaminhar pra tela cadastro (vermelha)
                         navigate("/Evento")
+                        console.log("caiuuu aqui 2");
+                        //ele vai me encaminhar pra tela cadastro (vermelha)
                     }
                 }
             } catch (error) {

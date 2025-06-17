@@ -24,10 +24,10 @@ const Lista = (props) => {
                     {props.lista && props.lista.length > 0 ? (
                         props.lista.map((item) => (
 
-                            <tr className="item_lista" key={props.tipoLista == "TiposEventos" ? item.idTipoEvento : item.IdTipoUsuario ? item.idEvento : item.idEvento}>
+                            <tr className="item_lista" key={props.tipoLista == "TiposEventos" ? item.idTipoEvento : item.IdTipoUsuario ? item.idEvento : item.IdTipoUsuario}>
 
                                 {/* Mostra o nome do item */}
-                                <td data-cell="Nome" style={{ display: props.tipoEvento }}>{props.tipoLista == "TiposEventos" ? item.tituloTipoEvento : item.tituloTipoUsuario ? item.nomeEvento : item.nomeEvento}</td>
+                                <td data-cell="Nome" style={{ display: props.tipoEvento }}>{props.tipoLista == "TiposEventos" ? item.tituloTipoEvento : item.tituloTipoUsuario ? item.nomeEvento : item.nomeEvento} {item.tituloTipoUsuario}</td>
 
                                 <td data-cell="Data Evento" style={{ display: props.visibilidadeD }}>{new Date(item.dataEvento).toLocaleDateString('pt-BR')}</td>
 

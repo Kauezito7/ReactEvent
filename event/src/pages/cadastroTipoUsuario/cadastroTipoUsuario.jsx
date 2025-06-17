@@ -90,7 +90,7 @@ const CadastroTipoUsuario = () => {
 
         if (result.isConfirmed) {
             try {
-                await api.delete(`tiposUsuarios/${idTipoUsuario}`);
+                await api.delete(`tiposUsuarios/${idTipoUsuario.idTipoUsuario}`);
                 swalWithBootstrapButtons.fire(
                     "Deletado!",
                     "O usuario foi deletado com sucesso.",
@@ -177,22 +177,40 @@ const CadastroTipoUsuario = () => {
 
 
             <Lista
-                titulo="Lista De Tipo Usuário"
+
+                // titulo = "Lista Tipo Usuario"
+                // namePlace="Titulo"
+                // lista={listaTipoUsuario}
+                // //tipoLista="TiposUsuarios"
+                // visibilidade="table-cell"
+                // chaveId="idTipoUsuario"
+                // chaveNome="tituloTipoUsuario"
+
+
+                // titulocoluna2="Tipo"
+                // visibilidadeD="none"
+                // visibilidade2="none"
+
+                // titulocoluna3="Editar"
+                // titulocoluna4="Excluir"
+
+                // funcEditar={atualizarTipoUsuario}
+                // funcExcluir={excluirTipoUsuario}
+
+                titulo="Lista tipo de Usuario"
                 lista={listaTipoUsuario}
-                tipoLista="Tipo Usuario"
-                namePlace="Titulo"
-                visibilidade="table-cell"
-                chaveId="idTipoUsuario"
-                chaveNome="tituloTipoUsuario"
-                funcEditar={atualizarTipoUsuario}
-                funcExcluir={excluirTipoUsuario}
-                titulocoluna2="Tipo"
+                tipoLista="TiposUsuarios"
+                chaveNome="TituloTipoUsuario"
+                chaveId="IdTipoUsuario"
+                nomePlace="Titulo"
                 visibilidadeD="none"
                 visibilidade2="none"
+                funcEditar={atualizarTipoUsuario}
+                funcExcluir={excluirTipoUsuario}
+                titulocoluna1="Titulo"
 
                 titulocoluna3="Editar"
                 titulocoluna4="Excluir"
-
             />
 
             <Footer />

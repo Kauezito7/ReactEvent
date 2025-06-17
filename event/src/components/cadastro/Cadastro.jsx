@@ -69,7 +69,9 @@ const Cadastro = (props) => {
 
                             <textarea name="" id="" style={{ display: props.visibilidade }}
                                 value={props.valorInputDescricao}
-                                onChange={(e) => props.setValorInputDescricao(e.target.value)}>
+                                onChange={(e) => props.setValorInputDescricao(e.target.value)}
+                                placeholder="Descrição">
+                                <label htmlFor="">Descrição</label>
                             </textarea>
 
                         </div>

@@ -82,7 +82,7 @@ const CadastroTipoEvento = () => {
         });
         if (result.isConfirmed) {
             try {
-                await api.delete(`tiposEventos/${idTipoEvento}`);
+                await api.delete(`tiposEventos/${idTipoEvento.idTipoEvento}`);
                 swalWithBootstrapButtons.fire(
                     "Deletado!",
                     "O evento foi deletado com sucesso.",

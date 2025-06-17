@@ -13,6 +13,10 @@ const Privado = (props) => {
     //tke, idUsuario, tipoUsuario
 
     // Se nao estiver authenticado, mada para login
+
+    console.log(usuario);
+    console.log(usuario.tipoUsuario);
+    
     if (!usuario) {
        return <Navigate to="/" />; 
     }
@@ -33,10 +37,10 @@ const Rotas = () => {
         <BrowserRouter >
         <Routes>
             <Route path="/" element={<Login />} exact/>
-            <Route path="/ListaEvento" element={<Privado tipoPermitido="aluno" item={ListagemEventos} />} />
-            <Route path="/Evento" element={< Privado tipoPermitido="admin" item={CadastroEvento}  />} />
-            <Route path="/TipoEvento" element={<Privado tipoPermitido="admin" item={CadastroTipoEvento} />} />
-            <Route path="/TipoUsuario" element={<Privado tipoPermitido="admin" item={CadastroTipoUsuario}  />} />
+            <Route path="/ListaEvento" element={<Privado tipoPermitido="Comum" item={ListagemEventos} />} />
+            <Route path="/Evento" element={< Privado tipoPermitido="Admin" item={CadastroEvento}  />} />
+            <Route path="/TipoEvento" element={<Privado tipoPermitido="Admin" item={CadastroTipoEvento} />} />
+            <Route path="/TipoUsuario" element={<Privado tipoPermitido="Admin" item={CadastroTipoUsuario}  />} />
               <Route element = {<TelaHome/>} path = "/telahome"  />
 
 
