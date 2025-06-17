@@ -41,7 +41,7 @@
 
 .tabela .table_cabecalho :nth-child(2) {
     width: 160px;
-    text-align: start;
+    /* text-align: start; */
 }
 
 .tabela .table_cabecalho th {
@@ -51,9 +51,9 @@
 }
 
 .item_lista td {
-    padding: 20px 5px 0;
+    padding: 20px 48px 0;
     height: 80px;
-    width: 30%;
+    width: 100%;
     border-bottom: 1px solid white;
 }
 

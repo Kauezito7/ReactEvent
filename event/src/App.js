@@ -7,12 +7,14 @@ import CadastroTipoEvento from "./pages/cadastroTipoEvento/cadastroTipoEvento.js
 import CadastroTipoUsuario from "./pages/cadastroTipoUsuario/cadastroTipoUsuario.jsx";
 import Rotas from './Routes/routes.js';
 import { AuthProvider } from './contexts/AuthContext.js';
+import Chatbox from './components/chatbox/Chatbox.js';
 
 
 function App() {
   return (
     <AuthProvider>
     <Rotas/>
+    <Chatbox />
     </AuthProvider>
   );
 }

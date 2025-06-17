@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+Saved
+
+/* Modo Claro */
+.light-mode {
+  background-color: white;
+  color: black;
+  transition: 0.3s ease;
+}
+
+/* Modo Escuro */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+  transition: 0.3s ease;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
