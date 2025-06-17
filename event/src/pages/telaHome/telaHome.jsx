@@ -51,7 +51,7 @@ const Home = () => {
               <div className="cartao-evento" key={index}>
                 <h2>{evento.titulo}</h2>
                 <p>{evento.descricao}</p>
-                <Link className="link-evento" to="/Login">
+                <Link className="link-evento" to="/">
                   Conectar
                 </Link>
               </div>

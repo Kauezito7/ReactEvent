@@ -205,12 +205,13 @@ const CadastroTipoUsuario = () => {
                 nomePlace="Titulo"
                 visibilidadeD="none"
                 visibilidade2="none"
-                funcEditar={atualizarTipoUsuario}
-                funcExcluir={excluirTipoUsuario}
+                visibilidadeIco="none"
+                // funcEditar={atualizarTipoUsuario}
+                // funcExcluir={excluirTipoUsuario}
                 titulocoluna1="Titulo"
 
-                titulocoluna3="Editar"
-                titulocoluna4="Excluir"
+                // titulocoluna3="Editar"
+                // titulocoluna4="Excluir"
             />
 
             <Footer />

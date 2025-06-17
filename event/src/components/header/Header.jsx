@@ -7,21 +7,23 @@ const Header = (props) => {
     return (
         <header>
             <div className=" cabecalho">
-                <nav>
-                <Link to="/"><img src={Logo1} alt="Logo Evento" /></Link>
-                </nav>
+                
+                <img src={Logo1} alt="Logo Evento" />
+                
                 
                 <nav className="nav_header">
                     
                     <Link href="" to="/telahome" className="link_header">Home</Link>
                     <Link href="" to="/TipoEvento" className="link_header">Eventos</Link>
                     <Link href="" to="/TipoUsuario" className="link_header">Usuários</Link>
-                    
-                    {/* <Link href="" to="" className="link_header">Contatos</Link> */}
+                    <Link href="" to="/" className="link_header">Login</Link>
                 </nav>
                 <div className="Adm">
+                    <link rel="stylesheet" href="" />
                     <a href="" className="link_header">{props.nomeusu}</a>
+                    <Link to="/">
                     <img src={administracao} alt="Vetor" />
+                    </Link>
                 </div>
 
             </div>

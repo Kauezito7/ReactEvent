@@ -31,8 +31,6 @@ const ListagemEventos = () => {
 
     const {usuario} = useAuth();
     
-
-
     async function listarEventos() {
         try {
             const resposta = await api.get("eventos")
@@ -59,11 +57,10 @@ const ListagemEventos = () => {
             console.log(error);
         }
     }
+
     useEffect(() => {
         listarEventos();
     }, [listaEvento])
-
-
 
     function abrirModal(tipo, dados) {
         //tipo de modal
@@ -82,18 +79,16 @@ const ListagemEventos = () => {
     async function manipularPresenca(idEvento, presenca, idPresenca) {
         try {
             if (presenca && idPresenca != "") {
-                console.log("Aqui 1");
-                
                 //atualizacao: situacao para FALSE 
                 await api.put(`PresencasEventos/${idPresenca}`, {situacao: false});
                 Swal.fire ('Removido!', 'Sua presenca foi removida.', 'success')
             }else if(idPresenca != null){
-                console.log("Aqui 2");
+                
                 //atualizacao: situacao para TRUE
                 await api.put(`PresencasEventos/${idPresenca}`, {situacao: true});
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success')
             }else{
-                console.log("Aqui 3");
+                
                 //cadastrar uma nova presenca
                 // console.log(usuarioId)         
                 await api.post("PresencasEventos", {situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
@@ -128,7 +123,7 @@ const ListagemEventos = () => {
                 <hr />
                 <div className="tabela_evento">
                     <select name="Todos os Eventos" id="" className="select_evento" onChange={(e) => setFiltroData([e.target.value])}>
-                        <option value="Todos" selected>Todos os Eventos</option>
+                        <option value="todos" selected>Todos os Eventos</option>
                         <option value="futuros">Somente Futuros</option>
                         <option value="Passados">Somente Passados</option>
                     </select>

@@ -34,17 +34,24 @@ const Lista = (props) => {
                                 <td data-cell="Tipo Evento" style={{ display: props.visibilidade }}>{item.tiposEvento?.tituloTipoEvento}</td>
 
                                 {/* Ícone para editar, chama a função passada por props */}
-                                <td>
+                                <td style={{ display: props.visibilidadeIco }}>
                                     <img
-                                        className="icone_lista" src={Editar} alt="ícone de editar" style={{ cursor: "pointer" }}
+                                        className="icone_lista" src={Editar} alt="ícone de editar" 
+                                        style={{ cursor: "pointer" }}
+                                        // style2={{ display: props.visibilidadeIco }}
                                         onClick={() => props.funcEditar(item)}
+       
                                     />
                                 </td>
 
                                 {/* Ícone para excluir, chama a função passada por props */}
-                                <td>
+                                <td  style={{ display: props.visibilidadeIco }}>
+                                    
                                     <img
-                                        className="icone_lista" src={Excluir} alt="ícone de excluir" style={{ cursor: "pointer" }}
+                                        
+                                        className="icone_lista" src={Excluir} alt="ícone de excluir" 
+                                        style={{ cursor: "pointer" }}
+                                        //style2={{ display: props.visibilidadeIco }}
                                         onClick={() => props.funcExcluir(item)}
                                     />
                                 </td>
